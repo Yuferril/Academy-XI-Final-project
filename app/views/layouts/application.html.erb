@@ -1,0 +1,16 @@
+
+
+<html>
+  <head>
+    <% if current_user %>
+      Welcome, <%= current_user.name %>!
+      <%= link_to 'Logout', sessions_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Login', new_session_path %>
+      <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<h1>All Pokemons</h1>
+
+
+
+<% @pokemons.each do |pokemon| %>
+  <div>
+    <h2><%= pokemon.name %></h2>
+    <p><%= pokemon.description %></p>
+    <p><%= number_to_currency(pokemon.price) %></p>
+  </div>
+<% end %>
+
