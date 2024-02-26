@@ -8,6 +8,10 @@ import { isEmpty } from "lodash";
 export default function PaymentForm() {
   const userDetail = React.useContext(UserContext);
   const { user, updateUser } = userDetail;
+  console.log("hwel", user.ccnumber);
+  const [ccNum, setCcNum] = React.useState(
+    !isEmpty(user.ccnumber) ? user.ccnumber.replace(/\D/g, "") : ""
+  );
 
   return (
     <React.Fragment>
@@ -25,29 +29,32 @@ export default function PaymentForm() {
             autoComplete="cc-name"
             helperText={!user.ccname ? "Required Field" : ""}
             variant="standard"
-            defaultValue={
-              user.ccname ?? `${user.firstName + " " + user.lastName}`
-            }
+            defaultValue={user.ccname}
             onChange={(e) => updateUser({ ...user, ccname: e.target.value })}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
-            error={!user.ccnumber}
-            helperText={!user.ccnumber ? "Required Field" : ""}
+            error={!ccNum}
+            helperText={!ccNum ? "Required Field, Number only" : ""}
             id="cardNumber"
             label="Card number"
             fullWidth
             autoComplete="cc-number"
             variant="standard"
-            defaultValue={user.ccnumber}
-            onChange={(e) =>
+            defaultValue={ccNum.length > 0 ? user.ccnumber : ccNum}
+            onChange={(e) => {
+              setCcNum(e.target.value);
+              let cc = "";
+              if (e.target.value.length >= 4) {
+                cc = "xxxx-xxxx-xxxx-" + e.target.value.substring(-4, 4);
+              }
               updateUser({
                 ...user,
-                ccnumber: "xxxx-xxxx-xxxx-" + e.target.value.substring(-4, 4),
-              })
-            }
+                ccnumber: cc,
+              });
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>

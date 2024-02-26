@@ -88,6 +88,11 @@ export default function NavigationBar({
 
   const [historyOpen, setHistoryOpen] = React.useState(false);
 
+  const handleSignup = () => {
+    setIsLogin(false);
+    setIsSignup(true);
+  };
+
   const handleCheckout = () => {
     setCheckoutOpen(true);
     setCartOpen(false);
@@ -318,6 +323,7 @@ export default function NavigationBar({
           open={isLogin}
           handleClose={() => setIsLogin(false)}
           handleLogin={handleLogin}
+          handleSignup={handleSignup}
         />
       )}
       {isSignup && (

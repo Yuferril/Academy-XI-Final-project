@@ -55,6 +55,8 @@ export default function Checkout() {
 
     if (activeStep === 0) {
       disabled =
+        isEmpty(user.firstName) ||
+        isEmpty(user.lastName) ||
         isEmpty(user.address) ||
         isEmpty(user.city) ||
         isEmpty(user.state) ||
@@ -115,7 +117,6 @@ export default function Checkout() {
       //   });
       // });
 
-
       const orderItemsList = cartItems.map((item) => ({
         pokemon_id: item.id,
         name: item.name,
@@ -124,7 +125,6 @@ export default function Checkout() {
         sprite: item.sprite,
       }));
 
- 
       await fetch(`http://localhost:3000/orders/${order.id}/order_items`, {
         method: "POST",
         headers: {
@@ -132,7 +132,6 @@ export default function Checkout() {
         },
         body: JSON.stringify({ order_items_list: orderItemsList }),
       });
-
 
       setActiveStep(activeStep + 1);
       updateCartItem([]);

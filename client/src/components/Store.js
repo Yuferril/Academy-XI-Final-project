@@ -75,6 +75,7 @@ const Pokedex = () => {
       ccexp: userData.ccexp ?? "12/2024",
       city: userData.city ?? "Melbourne",
       state: userData.state ?? "Vic",
+      ccname: userData.ccname ?? userData.firstName + " " + userData.lastName
     });
   };
 

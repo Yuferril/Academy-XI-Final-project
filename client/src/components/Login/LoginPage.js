@@ -17,11 +17,15 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Notification from "../Notification/Notification";
 import { Link } from "@mui/material";
-import SignUp from "./SignUp";
 
 const defaultTheme = createTheme();
 
-export default function SignIn({ open, handleClose, handleLogin }) {
+export default function SignIn({
+  open,
+  handleClose,
+  handleLogin,
+  handleSignup,
+}) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
@@ -136,8 +140,8 @@ export default function SignIn({ open, handleClose, handleLogin }) {
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <Link href="/signup" variant="body2">
-                      {"Don't have an account? Sign Up"}
+                    <Link href="#" onClick={() => handleSignup()}>
+                      Don't have an account? Sign Up
                     </Link>
                   </Grid>
                 </Grid>
